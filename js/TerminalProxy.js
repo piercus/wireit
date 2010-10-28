@@ -65,7 +65,6 @@ lang.extend(WireIt.TerminalProxy, YAHOO.util.DDProxy, {
             //Call the parent's init method
             WireIt.TerminalProxy.superclass.init.apply(this, arguments);
            if (this.regionEl){
-              console.log("beforInitConstarints");
               this.initConstraints();
 
               Event.on(window, 'resize', function() {
