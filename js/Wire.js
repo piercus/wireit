@@ -180,7 +180,7 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     * @default null
     * @type Object
     */
-  editorButtons: null,
+  editorButtons: null, 
   
    /**
     * Set the options by putting them in this (so it overrides the prototype default)
@@ -308,7 +308,7 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     this.labelEl = WireIt.cn('div',{className:"WireIt-Wire-Label"}, this.labelStyle );
     
     if(this.labelEditor) {
-      this.labelField = new inputEx.InPlaceEdit({parentEl: this.labelEl, editorField: this.labelEditor, buttonConfigs: this.editorButtons, animColors:{from:"#FFFF99" , to:"#DDDDFF"} });
+      this.labelField = new inputEx.InPlaceEdit({parentEl: this.labelEl, editorField: this.labelEditor, buttonConfigs: this.editorButtons, animColors:{from:"#FFFF99" , to:"#DDDDFF"} }); 
       this.labelField.setValue(this.label);
     }
     else {
