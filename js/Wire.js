@@ -33,7 +33,7 @@ WireIt.Wire = function( terminal1, terminal2, parentEl, options) {
     */
    this.terminal2 = terminal2;
 
-	
+  
    /**
     * Event that is fired when a wire is clicked (on the wire, not the canvas)
     * You can register this event with myWire.eventWireClick.subscribe(function(e,params) { var wire = params[0], xy = params[1];}, scope);
@@ -41,26 +41,26 @@ WireIt.Wire = function( terminal1, terminal2, parentEl, options) {
     */
    this.eventMouseClick = new YAHOO.util.CustomEvent("eventMouseClick");
 
-	/**
+  /**
     * Event that is fired when the mouse enter the wire
     * You can register this event with myWire.eventMouseIn.subscribe(function(e,params) { var wire = params[0], xy = params[1];}, scope);
     * @event eventMouseIn
     */
-	this.eventMouseIn = new YAHOO.util.CustomEvent("eventMouseIn");
-	
-	/**
+  this.eventMouseIn = new YAHOO.util.CustomEvent("eventMouseIn");
+  
+  /**
     * Event that is fired when the mouse exits the wire
     * You can register this event with myWire.eventMouseOut.subscribe(function(e,params) { var wire = params[0], xy = params[1];}, scope);
     * @event eventMouseOut
     */
-	this.eventMouseOut = new YAHOO.util.CustomEvent("eventMouseOut");
-	
-	/**
+  this.eventMouseOut = new YAHOO.util.CustomEvent("eventMouseOut");
+  
+  /**
     * Event that is fired when the mouse moves inside the wire
     * You can register this event with myWire.eventMouseMove.subscribe(function(e,params) { var wire = params[0], xy = params[1];}, scope);
     * @event eventMouseMove
     */
-	this.eventMouseMove = new YAHOO.util.CustomEvent("eventMouseMove");
+  this.eventMouseMove = new YAHOO.util.CustomEvent("eventMouseMove");
 
 
    
@@ -74,9 +74,9 @@ WireIt.Wire = function( terminal1, terminal2, parentEl, options) {
    YAHOO.util.Dom.addClass(this.element, this.className);
 
    // Label
-	if(this.label) {
-		this.renderLabel();
-	}
+  if(this.label) {
+    this.renderLabel();
+  }
 
    // Call addWire on both terminals
    this.terminal1.addWire(this);
@@ -86,7 +86,7 @@ WireIt.Wire = function( terminal1, terminal2, parentEl, options) {
 
 YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
 
-	/** 
+  /** 
     * @property xtype
     * @description String representing this class for exporting as JSON
     * @default "WireIt.Wire"
@@ -94,96 +94,104 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     */
    xtype: "WireIt.Wire",
 
-	/** 
+  /** 
     * @property className
     * @description CSS class name for the wire element
     * @default "WireIt-Wire"
     * @type String
     */
-	className: "WireIt-Wire",
+  className: "WireIt-Wire",
 
-	/** 
+  /** 
     * @property cap
     * @description TODO
     * @default "round"
     * @type String
     */
-	cap: 'round',
-	
-	/** 
+  cap: 'round',
+  
+  /** 
     * @property bordercap
     * @description TODO
     * @default "round"
     * @type String
     */
-	bordercap: 'round',
-	
-	/** 
+  bordercap: 'round',
+  
+  /** 
     * @property width
     * @description Wire width
     * @default 3
     * @type Integer
     */
-	width: 3,
-	
-	/** 
+  width: 3,
+  
+  /** 
     * @property borderwidth
     * @description Border width
     * @default 1
     * @type Integer
     */
-	borderwidth: 1,
-	
-	/** 
+  borderwidth: 1,
+  
+  /** 
     * @property color
     * @description Wire color
     * @default 'rgb(173, 216, 230)'
     * @type String
     */
-	color: 'rgb(173, 216, 230)',
-	
-	/** 
+  color: 'rgb(173, 216, 230)',
+  
+  /** 
     * @property bordercolor
     * @description Border color
     * @default '#0000ff'
     * @type String
     */
-	bordercolor: '#0000ff',
-	
-	/** 
+  bordercolor: '#0000ff',
+  
+  /** 
     * @property label
     * @description Wire label
     * @default null
     * @type String
     */
-	label: null,
-	
-	/** 
+  label: null,
+  
+  /** 
     * @property labelStyle
     * @description Wire label style
     * @default null
     * @type Object
     */
-	labelStyle: null,
-	
-	/** 
+  labelStyle: null,
+  
+  /** 
     * @property labelEditor
     * @description inputEx field definition for the label editor
     * @default null
     * @type Object
     */
-	labelEditor: null,
-	
+  labelEditor: null,
+  
+  /** 
+    * @property editorButtons
+    * @description array of inputEx button definitions for the buttons of the label editor, if null, the default buttons are Ok and Cancel, note: if labelEditor is null, editorButtons is useless
+    * @default null
+    * @type Object
+    */
+  editorButtons: null,
+  
    /**
     * Set the options by putting them in this (so it overrides the prototype default)
     * @method setOptions
     */
    setOptions: function(options) {
       for(var k in options) {
-			if( options.hasOwnProperty(k) ) {
-				this[k] = options[k];
-			}
-		}
+      if( options.hasOwnProperty(k) ) {
+        this[k] = options[k];
+      }
+    }
    },
    
    /**
@@ -196,24 +204,24 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
       this.parentEl.removeChild(this.element);
    
       // Remove the wire reference from the connected terminals
-    	if(this.terminal1 && this.terminal1.removeWire) {
-			this.terminal1.removeWire(this);
-    	}
-    	if(this.terminal2 && this.terminal2.removeWire) {
-			this.terminal2.removeWire(this);
-    	}
+      if(this.terminal1 && this.terminal1.removeWire) {
+      this.terminal1.removeWire(this);
+      }
+      if(this.terminal2 && this.terminal2.removeWire) {
+      this.terminal2.removeWire(this);
+      }
 
-    	// Remove references to old terminals
-    	this.terminal1 = null;
-    	this.terminal2 = null;
+      // Remove references to old terminals
+      this.terminal1 = null;
+      this.terminal2 = null;
 
-		// Remove Label
-		if(this.labelEl) {
-			if(this.labelField) {
-				this.labelField.destroy();
-			}
-			this.labelEl.innerHTML = "";
-		}
+    // Remove Label
+    if(this.labelEl) {
+      if(this.labelField) {
+        this.labelField.destroy();
+      }
+      this.labelEl.innerHTML = "";
+    }
    },
 
 
@@ -242,9 +250,9 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
       var min=[ Math.min(p1[0],p2[0])-margin[0], Math.min(p1[1],p2[1])-margin[1]];
       var max=[ Math.max(p1[0],p2[0])+margin[0], Math.max(p1[1],p2[1])+margin[1]];
 
-		// Store the min, max positions to display the label later
-		this.min = min;
-		this.max = max;      
+    // Store the min, max positions to display the label later
+    this.min = min;
+    this.max = max;      
 
       // Redimensionnement du canvas
       var lw=Math.abs(max[0]-min[0]);
@@ -284,52 +292,52 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     * @method redraw
     */
    redraw: function() {
-				
+        
       this.draw();
 
-		if(this.label) {
-			this.positionLabel();
-		}
+    if(this.label) {
+      this.positionLabel();
+    }
    },
 
-	/**
-	 * Render the label container
-	 */
-	renderLabel: function() {
-		
-		this.labelEl = WireIt.cn('div',{className:"WireIt-Wire-Label"}, this.labelStyle );
-		
-		if(this.labelEditor) {
-			this.labelField = new inputEx.InPlaceEdit({parentEl: this.labelEl, editorField: this.labelEditor, animColors:{from:"#FFFF99" , to:"#DDDDFF"} });
-			this.labelField.setValue(this.label);
-		}
-		else {
-			this.labelEl.innerHTML = this.label;
-		}
-		
-		this.element.parentNode.appendChild(this.labelEl);
-		
-	},
-	
-	/**
-	 * Set the label
-	 */
-	setLabel: function(val) {
-		if(this.labelEditor) {
-			this.labelField.setValue(val);
-		}
-		else {
-			this.labelEl.innerHTML = val;
-		}
-	},
+  /**
+   * Render the label container
+   */
+  renderLabel: function() {
+    
+    this.labelEl = WireIt.cn('div',{className:"WireIt-Wire-Label"}, this.labelStyle );
+    
+    if(this.labelEditor) {
+      this.labelField = new inputEx.InPlaceEdit({parentEl: this.labelEl, editorField: this.labelEditor, buttonConfigs: this.editorButtons, animColors:{from:"#FFFF99" , to:"#DDDDFF"} });
+      this.labelField.setValue(this.label);
+    }
+    else {
+      this.labelEl.innerHTML = this.label;
+    }
+    
+    this.element.parentNode.appendChild(this.labelEl);
+    
+  },
+  
+  /**
+   * Set the label
+   */
+  setLabel: function(val) {
+    if(this.labelEditor) {
+      this.labelField.setValue(val);
+    }
+    else {
+      this.labelEl.innerHTML = val;
+    }
+  },
 
-	/**
-	 * Position the label element to the center
-	 */
-	positionLabel: function() {
-	  YAHOO.util.Dom.setStyle(this.labelEl,"left",(this.min[0]+this.max[0]-this.labelEl.clientWidth)/2 + "px");
-	  YAHOO.util.Dom.setStyle(this.labelEl,"top",(this.min[1]+this.max[1]-this.labelEl.clientHeight)/2 + "px");
-	},
+  /**
+   * Position the label element to the center
+   */
+  positionLabel: function() {
+    YAHOO.util.Dom.setStyle(this.labelEl,"left",(this.min[0]+this.max[0]-this.labelEl.clientWidth)/2 + "px");
+    YAHOO.util.Dom.setStyle(this.labelEl,"top",(this.min[1]+this.max[1]-this.labelEl.clientHeight)/2 + "px");
+  },
    
    /**
     * Determine if the wire is drawn at position (x,y) relative to the canvas element. This is used for mouse events.
@@ -338,9 +346,9 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     */
    wireDrawnAt: function(x,y) {
       var ctxt = this.getContext();
-	   var imgData = ctxt.getImageData(x,y,1,1);
-	   var pixel = imgData.data;
-	   return !( pixel[0] === 0 && pixel[1] === 0 && pixel[2] === 0 && pixel[3] === 0 );
+     var imgData = ctxt.getImageData(x,y,1,1);
+     var pixel = imgData.data;
+     return !( pixel[0] === 0 && pixel[1] === 0 && pixel[2] === 0 && pixel[3] === 0 );
    },
    
    /**
@@ -356,20 +364,20 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
          this.mouseInState = false;
       }
 
-	   if( this.wireDrawnAt(x,y) ) {
-			if(!this.mouseInState) {
-			   this.mouseInState=true;
-			   this.onWireIn(x,y);
-			}	
-			
-			this.onWireMove(x,y);
-	   }
-	   else {
-	      if(this.mouseInState) {
-	         this.mouseInState=false;
-			   this.onWireOut(x,y);
-	      }
-	   }
+     if( this.wireDrawnAt(x,y) ) {
+      if(!this.mouseInState) {
+         this.mouseInState=true;
+         this.onWireIn(x,y);
+      } 
+      
+      this.onWireMove(x,y);
+     }
+     else {
+        if(this.mouseInState) {
+           this.mouseInState=false;
+         this.onWireOut(x,y);
+        }
+     }
       
    },
    
@@ -381,7 +389,7 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     * @param {Integer} y top position of the mouse (relative to the canvas)
     */
    onWireMove: function(x,y) {
-		this.eventMouseMove.fire(this, [x,y]);
+    this.eventMouseMove.fire(this, [x,y]);
    },
    
    /**
@@ -392,7 +400,7 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     * @param {Integer} y top position of the mouse (relative to the canvas)
     */
    onWireIn: function(x,y) {
-		this.eventMouseIn.fire(this, [x,y]);
+    this.eventMouseIn.fire(this, [x,y]);
    },
    
    /**
@@ -403,7 +411,7 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     * @param {Integer} y top position of the mouse (relative to the canvas)
     */
    onWireOut: function(x,y) {
-		this.eventMouseOut.fire(this, [x,y]);
+    this.eventMouseOut.fire(this, [x,y]);
    },
    
    /**
@@ -414,8 +422,8 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     * @param {Integer} y top position of the mouse (relative to the canvas)
     */
    onClick: function(x,y) {
-		if( this.wireDrawnAt(x,y) ) {
-			this.onWireClick(x,y);
+    if( this.wireDrawnAt(x,y) ) {
+      this.onWireClick(x,y);
       }
    },
    
@@ -427,23 +435,23 @@ YAHOO.lang.extend(WireIt.Wire, WireIt.CanvasElement, {
     * @param {Integer} y top position of the mouse (relative to the canvas)
     */
    onWireClick: function(x,y) {
-		this.eventMouseClick.fire(this, [x,y]);
+    this.eventMouseClick.fire(this, [x,y]);
    },
 
 
-	/**
+  /**
     * Return the config of this Wire
     * @method getConfig
     */
-	getConfig: function() {
+  getConfig: function() {
       var obj = {
-			xtype: this.xtype
-		};
+      xtype: this.xtype
+    };
 
-		// Export the label value
-		if(this.labelEditor) {
-			obj.label = this.labelField.getValue();
-		}
+    // Export the label value
+    if(this.labelEditor) {
+      obj.label = this.labelField.getValue();
+    }
 
       return obj;
    }

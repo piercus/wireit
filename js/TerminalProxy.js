@@ -57,7 +57,6 @@ WireIt.TerminalProxy = function(terminal, options) {
 util.DDM.mode = util.DDM.INTERSECT;
 
 lang.extend(WireIt.TerminalProxy, YAHOO.util.DDProxy, {
-ang.extend(WireIt.TerminalProxy, YAHOO.util.DDProxy, {
   /**
    * We overwrite the initialisation to initialize a DDRegion, see http://developer.yahoo.com/yui/examples/dragdrop/dd-region.html
    * @method init
